@@ -16,7 +16,7 @@ const moviSchema = new Schema({
   },
   type: {
     type: String,
-    enum: ['film', 'serial'],
+    enum: ['film','serial'],
     default: 'film',
     required: true,
   },

@@ -17,8 +17,7 @@ export const startServer = () => {
   // }));
 
   app.get('/api/movies', async (req, res) => {
-    const data = await getMoviesById();
-
+    const data = await getMovies();
     res.json({
       data,
     });
@@ -28,15 +27,13 @@ export const startServer = () => {
     const { id } = req.params;
     const data = await getMoviesById(id);
 
-
     if (!data) {
       return res.status(404).json({
         message: `Movie with id=${id} not found`,
       });
-
-}
+    }
     res.json({
-      status:200,
+      status: 200,
       data,
     });
   });
