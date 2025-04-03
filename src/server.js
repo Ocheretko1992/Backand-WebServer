@@ -19,6 +19,8 @@ export const startServer = () => {
   app.get('/api/movies', async (req, res) => {
     const data = await getMovies();
     res.json({
+      status: 404,
+      message: "Successfully find movies",
       data,
     });
   });
