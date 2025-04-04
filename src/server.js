@@ -16,11 +16,17 @@ export const startServer = () => {
   //   }
   // }));
 
+  app.get('/', (req, res) => {
+    res.json({
+      message: 'Hello in Node JS',
+    });
+  });
+
   app.get('/api/movies', async (req, res) => {
     const data = await getMovies();
     res.json({
       status: 200,
-      message: "Successfully find movies",
+      message: 'Successfully find movies',
       data,
     });
   });
