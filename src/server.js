@@ -17,9 +17,6 @@ export const startServer = () => {
   // app.use(loggerPino);
 
   app.use('/movies', moviesRouter);
-  app.use('/', (req, res) => {
-    'You very';
-  });
 
   app.use(notFoundHandler);
 
