@@ -24,5 +24,7 @@ export const startServer = () => {
 
   const port = Number(getEnvVar('PORT', 3000));
 
+console.log('MONGODB_PASSWORD:', process.env.MONGODB_PASSWORD);
+
   app.listen(port, () => console.log(`Server runing on ${port} port`));
 };
