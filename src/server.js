@@ -2,61 +2,25 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import { getEnvVar } from './utils/getEnvVar.js';
-import { getMovies, getMoviesById } from './services/movies.js';
-// import pino from "pino-http";
+// import { loggerPino } from './middlewares/lloger.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+import moviesRouter from './routers/movies.js';
 
 export const startServer = () => {
   const app = express();
 
   app.use(cors());
+
   app.use(express.json());
-  // app.use(pino({
-  //   transport: {
-  //     target: "pino-pretty"
-  //   }
-  // }));
 
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello in Node JS',
-    });
-  });
+  // app.use(loggerPino);
 
-  app.get('/api/movies', async (req, res) => {
-    const data = await getMovies();
-    res.json({
-      status: 200,
-      message: 'Successfully find movies',
-      data,
-    });
-  });
+  app.use('/movies', moviesRouter);
 
-  app.get('/api/movies/:id', async (req, res) => {
-    const { id } = req.params;
-    const data = await getMoviesById(id);
+  app.use(notFoundHandler);
 
-    if (!data) {
-      return res.status(404).json({
-        message: `Movie with id=${id} not found`,
-      });
-    }
-    res.json({
-      status: 200,
-      data,
-    });
-  });
-
-  app.use((req, res) => {
-    res.status(404).json({
-      message: `${res.url} not found`,
-    });
-  });
-
-  app.use((error, req, res, next) => {
-    res.status(500).json({
-      message: error.message,
-    });
-  });
+  app.use(errorHandler);
 
   const port = Number(getEnvVar('PORT', 3000));
 
