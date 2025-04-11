@@ -7,6 +7,7 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import moviesRouter from './routers/movies.js';
 
+
 export const startServer = () => {
   const app = express();
 
@@ -23,8 +24,6 @@ export const startServer = () => {
   app.use(errorHandler);
 
   const port = Number(getEnvVar('PORT', 3000));
-
-console.log('MONGODB_PASSWORD:', process.env.MONGODB_PASSWORD);
 
   app.listen(port, () => console.log(`Server runing on ${port} port`));
 };

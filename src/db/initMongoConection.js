@@ -7,10 +7,6 @@ export const initMongoConection = async () => {
 
     await mongoose.connect(
       `mongodb+srv://Oleh:${password}@cluster0.qgp7txo.mongodb.net/my-movies?retryWrites=true&w=majority&appName=Cluster0`,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      },
     );
   } catch (error) {
     console.log(error.message);
