@@ -6,6 +6,7 @@ import { getEnvVar } from './utils/getEnvVar.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import moviesRouter from './routers/movies.js';
+import { loggerPino } from './middlewares/lloger.js';
 
 
 export const startServer = () => {
@@ -15,7 +16,7 @@ export const startServer = () => {
 
   app.use(express.json());
 
-  // app.use(loggerPino);
+  app.use(loggerPino);
 
   app.use('/movies', moviesRouter);
 
